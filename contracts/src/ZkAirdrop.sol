@@ -6,8 +6,10 @@ interface IGroth16Verifier {
     function verifyProof(uint[2] memory a, uint[2][2] memory b, uint[2] memory c, uint[2] memory pubSignals) external view returns (bool);
 }
 
+
 contract ZkAirdrop {
-    address public s_groth16VerifierAddress;
+
+    IGroth16Verifier private immutable groth16Verifier;
 
     uint256 root;
 
@@ -19,8 +21,8 @@ contract ZkAirdrop {
 
     event ProofResult(bool result);
 
-    constructor(address groth16VerifierAddress, uint256 _root) {
-        s_groth16VerifierAddress = groth16VerifierAddress;
+    constructor(IGroth16Verifier _groth16Verifier, uint256 _root) {
+        groth16Verifier = _groth16Verifier;
         root= _root;
     }
 
@@ -32,7 +34,7 @@ contract ZkAirdrop {
     function submitProof(bytes calldata proof) private returns (bool) {
         uint256[2] memory input = [root, uint256(uint160(address(msg.sender)))];
         Groth16Proof memory groth16Proof = _decodeGroth16ProofCalldata(proof);
-        bool result = IGroth16Verifier(s_groth16VerifierAddress).verifyProof(groth16Proof.a, groth16Proof.b, groth16Proof.c, input);
+        bool result = groth16Verifier.verifyProof(groth16Proof.a, groth16Proof.b, groth16Proof.c, input);
         emit ProofResult(result);
         return result;
     }
