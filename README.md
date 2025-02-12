@@ -24,6 +24,7 @@ Commands:
 - snarkjs zkey contribute build/zkAirdrop_0000.zkey build/zkAirdrop.zkey --name="Second Contributor" -v
 
 In the contracts folder, we set foundry.
+
 We can generate the verifier smart contract using the following SnarkJS command from the project root: snarkjs zkey export solidityverifier circuits/build/zkAirdrop.zkey contracts/src/Groth16Verifier.sol
 
 Deploy smart contracts via scripts:  forge script script/ZkAirdrop.s.sol ZkAirdropScript --broadcast --verify --rpc-url polygon
