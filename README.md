@@ -23,6 +23,8 @@ Commands:
 - snarkjs groth16 setup build/zkAirdrop.r1cs build/pot14_final.ptau build/zkAirdrop_0000.zkey
 - snarkjs zkey contribute build/zkAirdrop_0000.zkey build/zkAirdrop.zkey --name="Second Contributor" -v
 
+When you generate the proving key(zkAirdrop.zkey) and witness generation(zkAirdrop.wasm) files, move them into the public folder.
+
 In the contracts folder, we set foundry.
 
 We can generate the verifier smart contract using the following SnarkJS command from the project root: snarkjs zkey export solidityverifier circuits/build/zkAirdrop.zkey contracts/src/Groth16Verifier.sol
