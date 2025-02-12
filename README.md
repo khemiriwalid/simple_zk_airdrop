@@ -2,6 +2,7 @@
 
 
 Install dependencies: yarn install
+
 Run the UI: yarn run dev
 
 The project consists of three main parts:
